@@ -1,0 +1,44 @@
+## Editors and Development environments
+*~
+*.swp
+*.bak*
+*.orig
+# Vim
+*.vim
+# Kate
+.*.kate-swp
+.swp.*
+# KDevelop4
+.kdev4/
+*.kdev4
+# Eclipse (CDT and LDT)
+.project
+.cproject
+.settings/
+.buildpath
+.metadata
+# GNU Global
+tags
+!tags/
+gtags.files
+.idea/*
+# Codelite
+*.project
+
+## Build files
+CMakeFiles
+Makefile
+cmake_install.cmake
+CMakeCache.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
+*.cbp
+*.layout
+*.o
+*.a
+*.ninja
+.ninja*
+*.gch
+cmake-build-debug/
+cmake-build-release/
+build/
