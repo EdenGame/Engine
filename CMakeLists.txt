@@ -21,6 +21,7 @@ set(MAIN_SOURCES
 	src/main.cpp)
 
 set(CLIENT_SOURCES
+	src/client/client.cpp
 	src/client/window.cpp)
 
 add_executable(${PROJECT_NAME}
