@@ -52,3 +52,15 @@ include_directories(lib)
 
 target_link_libraries(${PROJECT_NAME}
 	${GLAD_LIBRARIES})
+
+# Include JsonCPP
+
+add_library(json
+	lib/json/jsoncpp.cpp
+	lib/json/json.h
+	lib/json/json-forwards.h)
+
+set(JSON_LIBRARIES json)
+
+target_link_libraries(${PROJECT_NAME}
+	${JSON_LIBRARIES})
