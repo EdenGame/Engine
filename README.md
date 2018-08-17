@@ -44,14 +44,22 @@ mkdir build && cd build
 Build with CMake and make:
 ```
 cmake ..
-make
+make game
 # or, to specify a number of processors
-make -j <number of processors>
+make game -j <number of processors>
 # or, to use the number in your computer
-make -j$(nproc)
+make game -j$(nproc)
 ```
 
 Run it:
 ```
 ./ProjectEden
+```
+
+##### Build Unit Tests
+
+Switch to the `build` directory and build with make:
+```
+cd build
+make tests
 ```
