@@ -34,7 +34,8 @@ add_dependencies(game ${PROJECT_NAME})
 
 # Generate Unit Tests Executable
 
-set(TEST_SOURCES)
+set(TEST_SOURCES
+	tests/client/window.cpp)
 
 add_executable(${UNIT_TESTS_EXECUTABLE}
 	${TEST_SOURCES}
