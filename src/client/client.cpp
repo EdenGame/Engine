@@ -22,16 +22,10 @@ Client::Client() {
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
 
 	// Create window
-	window = MClient::Window("ProjectEden");
-
-	// Initialize GLAD
-	if (!gladLoadGLLoader(SDL_GL_GetProcAddress)) {
-		std::cerr << "Failed to initialize GLAD" << std::endl;
-		std::exit(1);
-	}
-
-	MClient::windowSize size = window.getSize();
-	glViewport(0, 0, size.w, size.h);
+	window = new MClient::Window();
+	window->setSize(1024, 576);
+	window->setTitle("ProjectEden");
+	window->show();
 
 	// Enable Depth Buffer
 	glEnable(GL_DEPTH_TEST);
@@ -61,5 +55,8 @@ void Client::main() {
 				shouldQuit = true;
 			}
 		}
+
+		// Update window
+		SDL_GL_SwapWindow(this->window->getWindow());
 	}
 }

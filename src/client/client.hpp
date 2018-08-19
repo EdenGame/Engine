@@ -15,7 +15,7 @@ class Client {
 	private:
 		Client();
 
-		Window window;
+		Window *window;
 };
 
 }
