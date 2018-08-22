@@ -25,9 +25,13 @@ set(CLIENT_SOURCES
 	src/client/client.cpp
 	src/client/window.cpp)
 
+set(UTIL_SOURCES
+	src/utilities/version.cpp)
+
 add_executable(${PROJECT_NAME}
 	${MAIN_SOURCES}
-	${CLIENT_SOURCES})
+	${CLIENT_SOURCES}
+	${UTIL_SOURCES})
 
 add_custom_target(game)
 add_dependencies(game ${PROJECT_NAME})
@@ -35,11 +39,13 @@ add_dependencies(game ${PROJECT_NAME})
 # Generate Unit Tests Executable
 
 set(TEST_SOURCES
-	tests/client/window.cpp)
+	tests/client/window.cpp
+	tests/utilities/version.cpp)
 
 add_executable(${UNIT_TESTS_EXECUTABLE}
 	${TEST_SOURCES}
-	${CLIENT_SOURCES})
+	${CLIENT_SOURCES}
+	${UTIL_SOURCES})
 
 target_include_directories(${UNIT_TESTS_EXECUTABLE} PUBLIC src)
 add_custom_target(tests)
