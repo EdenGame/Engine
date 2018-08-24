@@ -179,6 +179,7 @@ TEST_CASE("operator overloads compare the main version and prerelease but ignore
 		REQUIRE(Version("1.0.0-beta.11") < Version("1.0.0-rc.1"));
 		REQUIRE(Version("1.0.0-rc.1") < Version("1.0.0"));
 		REQUIRE_FALSE(Version("1.0.0-beta") < Version("1.0.0-beta"));
+		REQUIRE_FALSE(Version("1.2.3") < Version("1.2.3"));
 
 		SECTION("less than operator can compare a version object and a string") {
 			REQUIRE(Version("1.0.0") < "2.0.0");
@@ -191,6 +192,7 @@ TEST_CASE("operator overloads compare the main version and prerelease but ignore
 		REQUIRE(Version("2.0.0") > Version("1.0.0"));
 		REQUIRE(Version("1.0.0-alpha.1") > Version("1.0.0-alpha"));
 		REQUIRE_FALSE(Version("1.0.0-beta") > Version("1.0.0-beta"));
+		REQUIRE_FALSE(Version("1.2.3") > Version("1.2.3"));
 
 		SECTION("greater than operator can compare a version object and a string") {
 			REQUIRE(Version("2.0.0") > "1.0.0");

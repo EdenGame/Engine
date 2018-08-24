@@ -285,6 +285,10 @@ bool Version::Prerelease::operator == (const Prerelease &b) const {
 
 // [bool] Less than operator overload using object
 bool Version::Prerelease::operator < (const Prerelease &b) const {
+	// if neither have prerelease data, return false
+	if (this->type.empty() && this->version == -1 && b.type.empty() && b.version == -1)
+		return false;
+
 	// if there is no prerelease data, return true
 	if (b.type.empty() && b.version == -1)
 		return true;
