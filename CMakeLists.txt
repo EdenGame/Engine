@@ -26,7 +26,8 @@ set(CLIENT_SOURCES
 	src/client/window.cpp)
 
 set(UTIL_SOURCES
-	src/utilities/version.cpp)
+	src/utilities/version.cpp
+	src/utilities/range.cpp)
 
 add_executable(${PROJECT_NAME}
 	${MAIN_SOURCES}
@@ -40,7 +41,8 @@ add_dependencies(game ${PROJECT_NAME})
 
 set(TEST_SOURCES
 	tests/client/window.cpp
-	tests/utilities/version.cpp)
+	tests/utilities/version.cpp
+	tests/utilities/range.cpp)
 
 add_executable(${UNIT_TESTS_EXECUTABLE}
 	${TEST_SOURCES}
