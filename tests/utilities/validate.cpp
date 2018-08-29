@@ -17,3 +17,21 @@ TEST_CASE("urls must follow the uri scheme specification", "[validate]") {
 	REQUIRE(Validate::url("https://doe.com"));
 	REQUIRE(Validate::url("http://hello.world.doe.com"));
 }
+
+TEST_CASE("package names must be url-safe and readable", "[validate]") {
+	SECTION("names cannot begin with an underscore, a dash, or a dot (_, -, .)") {
+		REQUIRE_FALSE(Validate::packageName("_name"));
+		REQUIRE_FALSE(Validate::packageName("-name"));
+		REQUIRE_FALSE(Validate::packageName(".name"));
+		REQUIRE(Validate::packageName("name-name_name.name"));
+	}
+
+	SECTION("names may not contain uppercase characters") {
+		REQUIRE_FALSE(Validate::packageName("NaMe"));
+		REQUIRE(Validate::packageName("name"));
+	}
+
+	SECTION("names may include numbers (0-9), underscores, dashes, and dots") {
+		REQUIRE(Validate::packageName("package-2_more.io"));
+	}
+}

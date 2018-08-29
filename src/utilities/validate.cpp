@@ -26,5 +26,13 @@ namespace MUtilities {
 
 			return true;
 		}
+
+		// [bool] Validate package name
+		bool packageName(std::string name) {
+			if (!std::regex_match(name, std::regex(R"(^[^_\-\.][a-z0-9\-_\.]+$)")))
+				return false;
+
+			return true;
+		}
 	}
 }
