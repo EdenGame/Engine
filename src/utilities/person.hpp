@@ -7,6 +7,8 @@
 #include <cstddef>
 #include <regex>
 
+#include "validate.hpp"
+
 namespace MUtilities {
 
 class Person {
