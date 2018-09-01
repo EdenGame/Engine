@@ -29,7 +29,8 @@ set(UTIL_SOURCES
 	src/utilities/version.cpp
 	src/utilities/range.cpp
 	src/utilities/person.cpp
-	src/utilities/validate.cpp)
+	src/utilities/validate.cpp
+	src/utilities/utility.cpp)
 
 add_executable(${PROJECT_NAME}
 	${MAIN_SOURCES}
@@ -46,7 +47,8 @@ set(TEST_SOURCES
 	tests/utilities/version.cpp
 	tests/utilities/range.cpp
 	tests/utilities/person.cpp
-	tests/utilities/validate.cpp)
+	tests/utilities/validate.cpp
+	tests/utilities/utility.cpp)
 
 add_executable(${UNIT_TESTS_EXECUTABLE}
 	${TEST_SOURCES}
