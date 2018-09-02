@@ -34,5 +34,17 @@ namespace MUtilities {
 
 			return true;
 		}
+
+		// [bool] Validate dependency name
+		bool dependName(std::string name) {
+			std::regex rgx(R"(^(collection|ssm|csm|res)\:(.+)$)");
+			std::smatch match;
+
+			if (std::regex_search(name, match, rgx)) {
+				return packageName(match[2]);
+			}
+
+			return false;
+		}
 	}
 }

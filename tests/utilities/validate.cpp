@@ -35,3 +35,12 @@ TEST_CASE("package names must be url-safe and readable", "[validate]") {
 		REQUIRE(Validate::packageName("package-2_more.io"));
 	}
 }
+
+TEST_CASE("dependency names must include a valid package type and name", "[validate]") {
+	REQUIRE(Validate::dependName("collection:test"));
+	REQUIRE(Validate::dependName("ssm:test"));
+	REQUIRE(Validate::dependName("csm:test"));
+	REQUIRE(Validate::dependName("res:test"));
+	REQUIRE_FALSE(Validate::dependName("invalid:test"));
+	REQUIRE_FALSE(Validate::dependName("ssm:_pkgname"));
+}
