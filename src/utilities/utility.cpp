@@ -2,7 +2,7 @@
 
 namespace MUtilities {
 	namespace Utility {
-		// [Json Value] Pars
+		// [Json Value] Parse string to JSON object
 		Json::Value stojson(std::string str) {
 			Json::CharReaderBuilder builder;
 			Json::CharReader *reader = builder.newCharReader();
@@ -13,6 +13,12 @@ namespace MUtilities {
 
 			delete reader;
 			return obj;
+		}
+
+		// [bool] Check if string ends with a suffix
+		bool hasSuffix(const std::string &str, const std::string &suffix) {
+			return str.size() >= suffix.size() &&
+				str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
 		}
 	}
 }

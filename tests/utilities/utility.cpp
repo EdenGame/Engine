@@ -25,3 +25,9 @@ TEST_CASE("a string is parsed to a json value", "[utility]") {
 	REQUIRE(obj["int"].isInt());
 	REQUIRE(obj["int"].asInt() == 11);
 }
+
+TEST_CASE("check if a string ends with the provided suffix", "[utility]") {
+	REQUIRE_FALSE(hasSuffix("no", ".git"));
+	REQUIRE_FALSE(hasSuffix("verylong.com", ".git"));
+	REQUIRE(hasSuffix("https://doe.com/hello.git", ".git"));
+}
