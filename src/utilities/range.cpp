@@ -104,31 +104,19 @@ bool Range::set::satisfiedBy(const Version version) const {
 
 // [constructor] Parse comparator into an operator and a version
 Range::comparator::comparator(std::string comp) {
-	std::string tempOper;
-	char one = comp[0];
-	char two = comp[1];
+	std::regex rgx(R"(^\s*(>|<|<=|>=|=|)([\w\.\-\+]+)\s*$)");
+	std::smatch match;
 
-	// There is a single operator character (i.e. <, >, or =)
-	if (!std::isalnum(one) && std::isalnum(two)) {
-		tempOper = one;
-	// There are two operator characters (i.e. <= or >=)
-	} else if (!std::isalnum(one) && !std::isalnum(two)) {
-		tempOper = std::string() + one + two;
+	if (std::regex_search(comp, match, rgx)) {
+		if (match[1] == "") {
+			this->oper = "=";
+		} else {
+			this->oper = match[1];
+		}
+		this->version = Version(match[2]);
 	} else {
-		tempOper = '=';
-		comp = "=" + comp;
+		throw "MUtilities::Range::comparator::invalidComparatorString\n\t\"" + comp + "\"";
 	}
-
-	// Ensure that operator is valid
-	if (tempOper == "<" || tempOper == "<=" || tempOper == ">" || tempOper == ">=" || tempOper == "=")
-		this->oper = tempOper;
-	else
-		throw("MUtilities::Range::comparator::invalidComparatorOperator");
-	// Set version
-	if (tempOper.length() == 1)
-		this->version = Version(comp.substr(1, -1));
-	else
-		this->version = Version(comp.substr(2, -1));
 }
 
 // [bool] Check if comparator is satisfied by the version
