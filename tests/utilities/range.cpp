@@ -127,3 +127,21 @@ TEST_CASE("ranges can be created with logical ORs", "[range]") {
 	REQUIRE_FALSE(r2.satisfiedBy("15.67.2"));
 	REQUIRE_FALSE(r2.satisfiedBy("5.3.8"));
 }
+
+TEST_CASE("range objects can be compared", "[range]") {
+	SECTION("with other range objects") {
+		REQUIRE(Range(">4.2.8 <9.6.2") == Range(">4.2.8 <9.6.2"));
+		REQUIRE_FALSE(Range(">4.2.8 <9.6.2") == Range(">4.2.8"));
+		REQUIRE_FALSE(Range("1.4.6 || >=1.9.2 <3.0.0") == Range(">1.4.6 || <2.5.4 >2.0.0 || 0.6.3"));
+		REQUIRE(Range(">4.2.8") != Range("<1.4.5"));
+		REQUIRE_FALSE(Range(">6.8.3 <9.1.3") != Range(">6.8.3 <9.1.3"));
+	}
+
+	SECTION("with strings") {
+		REQUIRE(Range(">4.2.8 <9.6.2") == ">4.2.8 <9.6.2");
+		REQUIRE_FALSE(Range(">4.2.8 <9.6.2") == ">4.2.8");
+		REQUIRE_FALSE(Range("1.4.6 || >=1.9.2 <3.0.0") == ">1.4.6 || <2.5.4 >2.0.0 || 0.6.3");
+		REQUIRE(Range(">4.2.8") != "<1.4.5");
+		REQUIRE_FALSE(Range(">6.8.3 <9.1.3") != ">6.8.3 <9.1.3");
+	}
+}

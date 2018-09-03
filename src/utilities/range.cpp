@@ -24,7 +24,7 @@ Range::Range(std::string range) {
 					if (i == (range.size() - 1)) last += c;
 					// if last is not empty, create a comparator set and add to list
 					if (!last.empty()) {
-						this->csets.push_back(Range::set(last));
+						this->sets.push_back(Range::set(last));
 					}
 					last = "|"; // Reset last to a half logical or operator
 				} else { // else, append character to last
@@ -37,7 +37,7 @@ Range::Range(std::string range) {
 
 // [bool] Loop through comparator sets in attempt to find one that is satisfied by the version
 bool Range::satisfiedBy(Version version) {
-	for (auto const &cs: this->csets) {
+	for (auto const &cs: this->sets) {
 		if (cs.satisfiedBy(version))
 			return true;
 	}
@@ -65,6 +65,47 @@ Version Range::maxSatisfiedBy(std::vector<std::string> versions) {
 		passVec.push_back(Version(s));
 	}
 	return this->maxSatisfiedBy(passVec);
+}
+
+// [bool] Equality operator overload using object
+bool Range::operator == (const Range &b) const {
+	for (std::vector<set>::size_type i = 0; i != this->sets.size(); i++) {
+		// Ensure b has the same number of sets as this
+		if (this->sets.size() != b.sets.size()) {
+			return false;
+		}
+
+		set s = this->sets[i];
+		for (std::vector<comparator>::size_type j = 0; j != s.comparators.size(); j++) {
+			// Ensure b has the same number of comparators as this
+			if (s.comparators.size() != b.sets[i].comparators.size()) {
+				return false;
+			}
+
+			comparator c = s.comparators[j];
+			comparator bc = b.sets[i].comparators[j];
+
+			if (c.oper != bc.oper || c.version != bc.version) {
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+// [bool] Equality operator overload using string
+bool Range::operator == (const std::string &b) const {
+	Range obj = Range(b);
+	return *this == obj;
+}
+// [bool] Inequality operator overload using object
+bool Range::operator != (const Range &b) const {
+	return !(*this == b);
+}
+// [bool] Inequality operator overload using string
+bool Range::operator != (const std::string &b) const {
+	Range obj = Range(b);
+	return *this != obj;
 }
 
 /* Version Comparator Set Class */

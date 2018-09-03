@@ -11,6 +11,7 @@ namespace MUtilities {
 	/* Version Range Class */
 	class Range {
 		public:
+			//Range();
 			Range(std::string range);
 
 			bool satisfiedBy(Version version);
@@ -18,6 +19,13 @@ namespace MUtilities {
 
 			Version maxSatisfiedBy(std::vector<Version> versions);
 			Version maxSatisfiedBy(std::vector<std::string> versions);
+
+			// Operator overloads
+			friend std::ostream& operator << (std::ostream &strm, Range &a); // Ostream
+			bool operator == (const Range &b) const; // Equality using object
+			bool operator == (const std::string &b) const; // Equality using string
+			bool operator != (const Range &b) const; // Inequality using object
+			bool operator != (const std::string &b) const; // Inequality using string
 		private:
 			/* Version Comparator Class */
 			class comparator {
@@ -38,6 +46,6 @@ namespace MUtilities {
 			};
 
 			// List of comparator sets as parsed by constructor
-			std::vector<set> csets;
+			std::vector<set> sets;
 	};
 }
