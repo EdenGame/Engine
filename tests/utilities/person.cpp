@@ -85,3 +85,32 @@ TEST_CASE("person objects can be created from strings", "[person]") {
 		REQUIRE(p1.url() == "http://doe.com");
 	}
 }
+
+TEST_CASE("person objects can be compared", "[person]") {
+	SECTION("with other person objects") {
+		REQUIRE(Person(std::string("John Doe <j@doe.com>")) == Person(std::string("John Doe <j@doe.com>")));
+		REQUIRE_FALSE(Person(std::string("John Doe")) == Person(std::string("John Doe <j@doe.com>")));
+		REQUIRE(Person(std::string("John Doe <j@doe.com>")) != Person(std::string("John Doe (https://doe.com)")));
+		REQUIRE_FALSE(Person(std::string("John Doe (https://doe.com)")) !=
+			Person(std::string("John Doe (https://doe.com)")));
+	}
+
+	SECTION("with string representations") {
+		REQUIRE(Person(std::string("John Doe <j@doe.com>")) == std::string("John Doe <j@doe.com>"));
+		REQUIRE_FALSE(Person(std::string("John Doe")) == std::string("John Doe <j@doe.com>"));
+		REQUIRE(Person(std::string("John Doe <j@doe.com>")) != std::string("John Doe (https://doe.com)"));
+		REQUIRE_FALSE(Person(std::string("John Doe (https://doe.com)")) !=
+			std::string("John Doe (https://doe.com)"));
+	}
+
+	SECTION("with JSON representations") {
+		REQUIRE(Person(std::string("John Doe <j@doe.com>")) ==
+			Utility::stojson(R"({"name": "John Doe", "email": "j@doe.com"})"));
+		REQUIRE_FALSE(Person(std::string("John Doe")) ==
+			Utility::stojson(R"({"name": "John Doe", "email": "j@doe.com"})"));
+		REQUIRE(Person(std::string("John Doe <j@doe.com>")) !=
+			Utility::stojson(R"({"name": "John Doe", "url": "https://doe.com"})"));
+		REQUIRE_FALSE(Person(std::string("John Doe (https://doe.com)")) !=
+			Utility::stojson(R"({"name": "John Doe", "url": "https://doe.com"})"));
+	}
+}

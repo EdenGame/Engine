@@ -84,6 +84,35 @@ std::string Person::url() const {
 	return this->_url;
 }
 
+// [bool] Equality operator overload using object
+bool Person::operator == (const Person &b) const {
+	return (this->_name == b._name) && (this->_email == b._email) && (this->_url == b._url);
+}
+// [bool] Equality operator overload using string
+bool Person::operator == (const std::string &b) const {
+	Person obj = Person(b);
+	return *this == obj;
+}
+// [bool] Equality operator overload using JSON object
+bool Person::operator == (const Json::Value &b) const {
+	Person obj = Person(b);
+	return *this == obj;
+}
+// [bool] Inequality operator overload using object
+bool Person::operator != (const Person &b) const {
+	return !(*this == b);
+}
+// [bool] Inequality operator overload using string
+bool Person::operator != (const std::string &b) const {
+	Person obj = Person(b);
+	return *this != obj;
+}
+// [bool] Inequality operator overload using JSON object
+bool Person::operator != (const Json::Value &b) const {
+	Person obj = Person(b);
+	return *this != obj;
+}
+
 // [void] Validate email and url (name is already validated by main regex)
 void Person::validate() {
 	// Ensure that email is valid if not empty
