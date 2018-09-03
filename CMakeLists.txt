@@ -25,6 +25,9 @@ set(CLIENT_SOURCES
 	src/client/client.cpp
 	src/client/window.cpp)
 
+set(PACKAGES_SOURCES
+	src/packages/package.cpp)
+
 set(UTIL_SOURCES
 	src/utilities/version.cpp
 	src/utilities/range.cpp
@@ -35,6 +38,7 @@ set(UTIL_SOURCES
 add_executable(${PROJECT_NAME}
 	${MAIN_SOURCES}
 	${CLIENT_SOURCES}
+	${PACKAGES_SOURCES}
 	${UTIL_SOURCES})
 
 add_custom_target(game)
@@ -48,11 +52,13 @@ set(TEST_SOURCES
 	tests/utilities/range.cpp
 	tests/utilities/person.cpp
 	tests/utilities/validate.cpp
-	tests/utilities/utility.cpp)
+	tests/utilities/utility.cpp
+	tests/packages/package.cpp)
 
 add_executable(${UNIT_TESTS_EXECUTABLE}
 	${TEST_SOURCES}
 	${CLIENT_SOURCES}
+	${PACKAGES_SOURCES}
 	${UTIL_SOURCES})
 
 target_include_directories(${UNIT_TESTS_EXECUTABLE} PUBLIC src)
