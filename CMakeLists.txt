@@ -108,6 +108,55 @@ target_link_libraries(${PROJECT_NAME}
 target_link_libraries(${UNIT_TESTS_EXECUTABLE}
 	${JSON_LIBRARIES})
 
+# Include Lua
+
+set(LUA_SOURCE_PATH lib/lua/src)
+set(COMMON_CFLAGS "${COMMON_CFLAGS} -DLUA_USE_LINUX")
+
+add_library(lua
+	${LUA_SOURCE_PATH}/linit.c
+	${LUA_SOURCE_PATH}/lundump.c
+	${LUA_SOURCE_PATH}/ldblib.c
+	${LUA_SOURCE_PATH}/lauxlib.c
+	${LUA_SOURCE_PATH}/lstrlib.c
+	${LUA_SOURCE_PATH}/lobject.c
+	${LUA_SOURCE_PATH}/ldebug.c
+	${LUA_SOURCE_PATH}/loslib.c
+	${LUA_SOURCE_PATH}/lfunc.c
+	${LUA_SOURCE_PATH}/lgc.c
+	${LUA_SOURCE_PATH}/lcorolib.c
+	${LUA_SOURCE_PATH}/lstate.c
+	${LUA_SOURCE_PATH}/ltable.c
+	${LUA_SOURCE_PATH}/lutf8lib.c
+	${LUA_SOURCE_PATH}/ltm.c
+	${LUA_SOURCE_PATH}/lparser.c
+	${LUA_SOURCE_PATH}/lopcodes.c
+	${LUA_SOURCE_PATH}/loadlib.c
+	${LUA_SOURCE_PATH}/ldo.c
+	${LUA_SOURCE_PATH}/llex.c
+	${LUA_SOURCE_PATH}/lcode.c
+	${LUA_SOURCE_PATH}/ltablib.c
+	${LUA_SOURCE_PATH}/lctype.c
+	${LUA_SOURCE_PATH}/lmathlib.c
+	${LUA_SOURCE_PATH}/lvm.c
+	${LUA_SOURCE_PATH}/lbitlib.c
+	${LUA_SOURCE_PATH}/lzio.c
+	${LUA_SOURCE_PATH}/lmem.c
+	${LUA_SOURCE_PATH}/lapi.c
+	${LUA_SOURCE_PATH}/lbaselib.c
+	${LUA_SOURCE_PATH}/ldump.c
+	${LUA_SOURCE_PATH}/liolib.c
+	${LUA_SOURCE_PATH}/lstring.c)
+
+set(LUA_LIBRARIES lua)
+
+include_directories(${LUA_SOURCE_PATH})
+
+target_link_libraries(${PROJECT_NAME}
+	${LUA_LIBRARIES})
+target_link_libraries(${UNIT_TESTS_EXECUTABLE}
+	${LUA_LIBRARIES})
+
 # Include Catch2
 
 add_library(catch2 STATIC EXCLUDE_FROM_ALL
@@ -118,3 +167,6 @@ set(CATCH_LIBRARIES catch2)
 
 target_link_libraries(${UNIT_TESTS_EXECUTABLE}
 	${CATCH_LIBRARIES})
+
+# COMMON_CFLAGS has no effect without this line
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${COMMON_CFLAGS}")
