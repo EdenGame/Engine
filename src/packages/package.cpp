@@ -125,7 +125,7 @@ Package::Package(std::string path, Json::Value pkg) {
 			Json::Value depend = depends[name];
 
 			if (depend.isString() && MUtilities::Validate::dependName(name)) {
-				this->_dependencies.insert(std::make_pair(name, MUtilities::Range(depend.asString())));
+				this->_dependencies.insert(std::pair(name, MUtilities::Range(depend.asString())));
 			} else {
 				if (!depend.isNull()) {
 					throw "MPackages::Package::invalidDependency";
@@ -143,7 +143,7 @@ Package::Package(std::string path, Json::Value pkg) {
 			Json::Value depend = depends[name];
 
 			if (depend.isString() && MUtilities::Validate::dependName(name)) {
-				this->_optionalDependencies.insert(std::make_pair(name, MUtilities::Range(depend.asString())));
+				this->_optionalDependencies.insert(std::pair(name, MUtilities::Range(depend.asString())));
 			} else {
 				if (!depend.isNull()) {
 					throw "MPackages::Package::invalidOptionalDependency";
@@ -196,7 +196,7 @@ std::string Package::homepage() const {
 }
 // [pair of strings] Get bug reporting information
 std::pair<std::string, std::string> Package::bugs() const {
-	return std::make_pair(this->_bugs.url, this->_bugs.email);
+	return std::pair(this->_bugs.url, this->_bugs.email);
 }
 // [string] Get license
 std::string Package::license() const {

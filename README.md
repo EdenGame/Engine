@@ -24,10 +24,11 @@ Now that you have the source, you can begin building. Choose a platform from bel
 ### <span id="linux">Linux</span>
 
 ##### Dependencies
-| Dependency | Version |
-| ---------- | ------- |
-| CMake      | 3.1+    |
-| SDL        | 2.0+    |
+| Dependency | Version | Commentary                      |
+| ---------- | ------- | ------------------------------- |
+| GCC        | 7.0+    | Can be replaced with Clang 5.0+ |
+| CMake      | 3.8+    |                                 |
+| SDL        | 2.0+    |                                 |
 
 For Debian/Ubuntu:
 ```

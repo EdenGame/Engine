@@ -241,7 +241,7 @@ unsigned int Version::patch() {
 }
 // [Prerelease] Get prerelease data
 std::pair<std::string, int> Version::prerelease() {
-	return std::make_pair(this->_prerelease.type, this->_prerelease.version);
+	return std::pair(this->_prerelease.type, this->_prerelease.version);
 }
 // [string] Get build metadata
 std::string Version::meta() {

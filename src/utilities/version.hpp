@@ -12,8 +12,6 @@
 
 namespace MUtilities {
 
-enum VersionType {MAJOR, MINOR, PATCH, PRETYPE, PREVERSION};
-
 class Version {
 	public:
 		Version();
