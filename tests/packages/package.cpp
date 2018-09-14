@@ -14,6 +14,7 @@ class Pkg: public Package {
 
 		bool run() {
 			std::cout << "Called run!" << std::endl;
+			return true;
 		}
 };
 

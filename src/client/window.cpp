@@ -98,6 +98,8 @@ bool Window::handleEvent(SDL_Event event) {
 
 		return true;
 	}
+
+	return false;
 }
 
 // [SDL_Window] Get window

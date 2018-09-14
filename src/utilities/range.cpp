@@ -41,6 +41,8 @@ bool Range::satisfiedBy(Version version) {
 		if (cs.satisfiedBy(version))
 			return true;
 	}
+
+	return false;
 }
 // [bool] Convert version string to a version object and check if it satisfies
 bool Range::satisfiedBy(std::string version) {
@@ -172,4 +174,6 @@ bool Range::comparator::satisfiedBy(Version v) const {
 		return v >= this->version;
 	else if (this->oper == "=")
 		return v == this->version;
+
+	return false;
 }

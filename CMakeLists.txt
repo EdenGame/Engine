@@ -157,6 +157,13 @@ target_link_libraries(${PROJECT_NAME}
 target_link_libraries(${UNIT_TESTS_EXECUTABLE}
 	${LUA_LIBRARIES})
 
+# Include missing internal C++ libraries
+
+target_link_libraries(${PROJECT_NAME}
+	stdc++fs)
+target_link_libraries(${UNIT_TESTS_EXECUTABLE}
+	stdc++fs)
+
 # Include Catch2
 
 add_library(catch2 STATIC EXCLUDE_FROM_ALL
